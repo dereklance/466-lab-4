@@ -82,8 +82,8 @@ def showScatterPlot3D(clusters, outliers):
 	fig = plt.figure()
 	ax = fig.add_subplot(111, projection='3d')
 
-	colors = ['b', 'g', 'c', 'm', 'y', 'k']
-	markers=['o', '^', 's', '+', '*', 'd']
+	colors = ['b', 'g', 'c', 'm', 'y', 'k', 'b', 'g', 'c', 'm', 'y', 'k']
+	markers=['o', '^', 's', '+', '*', 'd', '^', 's', '+', '*', 'd', 'o']
 
 	for index, cluster in enumerate(clusters):
 		[xs, ys, zs] = zip(*cluster)
@@ -94,8 +94,8 @@ def showScatterPlot3D(clusters, outliers):
 	plt.show()
 
 def showScatterPlot2D(clusters, outliers):
-	colors = ['b', 'g', 'c', 'm', 'y', 'k']
-	markers=['o', '^', 's', '+', '*', 'd']
+	colors = ['b', 'g', 'c', 'm', 'y', 'k', 'b', 'g', 'c', 'm', 'y', 'k']
+	markers=['o', '^', 's', '+', '*', 'd', '^', 's', '+', '*', 'd', 'o']
 
 	for index, cluster in enumerate(clusters):
 		[xs, ys] = zip(*cluster)
