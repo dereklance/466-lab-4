@@ -2,7 +2,7 @@
 # Ian Battin, ibattin@calpoly.edu
 
 import parse, sys
-from kmeans import euclidianDistance
+from kmeans import euclidianDistance, findCentroid, findDistanceStats, outputClusterData
 import matplotlib.pyplot as plt
 
 def findDistanceMatrix(data):
@@ -22,6 +22,8 @@ def findClosePoints(data, distanceMatrix, epsilon):
 		closePoints.append(points)
 
 	return closePoints
+
+
 
 # def findCluster(data, index, closePoints, isVisited, epsilon, numPoints):
 # 	cluster = []
@@ -60,6 +62,7 @@ def dbscan(data, epsilon, minPoints):
 		if labels[index] is not None:
 			continue
 		neighbors = closePoints[index]
+		neighbors.remove(index)
 		if len(neighbors) < minPoints:
 			labels[index] = -1
 			continue
@@ -88,8 +91,9 @@ def showScatterPlot3D(clusters, outliers):
 	for index, cluster in enumerate(clusters):
 		[xs, ys, zs] = zip(*cluster)
 		ax.scatter(xs, ys, zs, c=colors[index], marker=markers[index])
-	[xs, ys] = zip(*outliers)
-	plt.scatter(xs, ys, c='r', marker='x')
+	if len(outliers > 0):
+		[xs, ys] = zip(*outliers)
+		plt.scatter(xs, ys, c='r', marker='x')
 
 	plt.savefig("matplotlib.png")
 
@@ -100,8 +104,9 @@ def showScatterPlot2D(clusters, outliers):
 	for index, cluster in enumerate(clusters):
 		[xs, ys] = zip(*cluster)
 		plt.scatter(xs, ys, c=colors[index], marker=markers[index])
-	[xs, ys] = zip(*outliers)
-	plt.scatter(xs, ys, c='r', marker='x')
+	if len(outliers) > 0:
+		[xs, ys] = zip(*outliers)
+		plt.scatter(xs, ys, c='r', marker='x')
 
 	plt.savefig("matplotlib.png")
 
@@ -114,6 +119,28 @@ def showScatterPlot(clusters, outliers):
 
 	showScatterPlot2D(clusters, outliers) if dimension == 2 else showScatterPlot3D(clusters, outliers)
 
+def outputClusterData(clusters, centroids):
+	for index, (cluster, centroid) in enumerate(zip(clusters, centroids)):
+		print(f'Cluster {index}:')
+		print(f'Center: {", ".join(map(str, centroid))}')
+		stats = findDistanceStats(cluster, centroid)
+		print(f'Max Dist. to Center: {stats["max"]}')
+		print(f'Min Dist. to Center: {stats["min"]}')
+		print(f'Avg Dist. to Center: {stats["avg"]}')
+		print(f'Sum Squared Error: {stats["sse"]}')
+		print(f'{len(cluster)} Points:')
+
+		for dataPoint in cluster:
+			print(', '.join(map(str, dataPoint)))
+		print()
+
+def outputOutlierData(outliers, numDataPoints):
+	print('Outliers:')
+	print('Percentage of data:', round(len(outliers) / numDataPoints * 100, 2))
+	print(len(outliers), 'Points:')
+	for outlier in outliers:
+		print(', '.join(map(str, outlier)))
+
 # args: <filename> <epsilon> <numPoints>
 def main():
 	data = parse.csv(sys.argv[1])
@@ -121,6 +148,10 @@ def main():
 	numPoints = int(sys.argv[3])
 
 	clusters, outliers = dbscan(data, epsilon, numPoints)
+	centroids = [findCentroid(cluster) for cluster in clusters]
+	outputClusterData(clusters, centroids)
+	outputOutlierData(outliers, len(data))
+
 	showScatterPlot(clusters, outliers)
 
 if __name__ == '__main__':
