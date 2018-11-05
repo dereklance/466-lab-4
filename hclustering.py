@@ -12,6 +12,20 @@ class Cluster:
     self.children = children 
     self.centroid = self.calculate_centroid()
 
+  def __eq__(self, other):
+    return self.uid == other.uid
+
+  def get_data_count(self):
+    count = 0
+
+    if self.children:
+      for child in self.children:
+        count += child.get_data_count()
+    else:
+      return 1
+
+    return count
+
   def calculate_centroid(self):
     centroid = list()
     for i in range(len(self.data[0])):
@@ -79,15 +93,30 @@ def calculate_min_max(data):
     min_max.append((min_val, max_val))
   return min_max
 
+def xml_print_dendrogram(root, indent = 0):
+  # Root
+  if indent == 0:
+    print('<tree height="', root.distance, '">', sep='')
+    for child in root.children:
+      xml_print_dendrogram(child, indent + 1)
+    print('</tree>')
+  elif root.children:
+    print(indent * '  ', '<node height="', root.distance, '">', sep='')
+    for child in root.children:
+      xml_print_dendrogram(child, indent + 1)
+    print(indent * '  ', '</node>', sep='')
+  else:
+    print(indent * '  ', '<leaf height="0" data="', root.data[0], '" />', sep='')
+
 def agglomerative_cluster(dataset):
   min_max = calculate_min_max(dataset)
 
   clusters = []
   for i in range(len(dataset)):
-    cluster = Cluster(str(i), [dataset[i], ], min_max)
+    cluster = Cluster(str(i), [dataset[i], ], min_max, 0, None)
     clusters.append(cluster)
 
-  while(len(clusters) != 1):
+  while(len(clusters) > 1):
     distance_matrix = calculate_distance_matrix(clusters)
     min_distance, min_clusters = get_min_distance(distance_matrix, clusters)
     merged = Cluster(uid = min_clusters[0].uid + min_clusters[1].uid,
@@ -96,11 +125,19 @@ def agglomerative_cluster(dataset):
                      distance = min_clusters[0].distance_to(min_clusters[1]),
                      children = [min_clusters[0], min_clusters[1]])
 
-    for i, cluster in enumerate(clusters):
-      if cluster.uid == min_clusters[0].uid or cluster.uid == min_clusters[1].uid:
-        del clusters[i]
-
+    clusters.remove(min_clusters[0])
+    clusters.remove(min_clusters[1])
     clusters.append(merged)
+
+  return clusters
+
+def get_clusters(dendrogram, threshold):
+  if dendrogram.distance < threshold:
+    return [dendrogram]
+  
+  clusters = []
+  for child in dendrogram.children:
+    clusters += get_clusters(child, threshold)
 
   return clusters
 
@@ -108,9 +145,19 @@ def main():
   dataset = parse.csv(sys.argv[1])
   threshold = None
   if len(sys.argv) == 3:
-    threshold = sys.argv[2]
+    threshold = float(sys.argv[2])
 
-  clusters = agglomerative_cluster(dataset)
+  dendrogram = agglomerative_cluster(dataset)[0]
+  xml_print_dendrogram(dendrogram)
+  print()
+
+  if threshold:
+    clusters = get_clusters(dendrogram, threshold)
+    for cluster in clusters:
+      print()
+      print("Cluster with height", cluster.distance, "and", cluster.get_data_count(), "points")
+      xml_print_dendrogram(cluster)
+    print(len(clusters), "clusters")
 
 if __name__ == '__main__':
 	main()
