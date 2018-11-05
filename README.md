@@ -1,6 +1,7 @@
 # 466-lab-4
 
 Ian Battin - ibattin@calpoly.edu
+
 Derek Lance - dlance@calpoly.edu
 
 Run 'pip install -r requirements.txt' to install dependencies

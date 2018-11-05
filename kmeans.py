@@ -4,7 +4,6 @@
 import sys, parse, random, math
 from operator import add
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 def euclidianDistance(pointA, pointB):
 	total = sum((pointA[index] - pointB[index]) ** 2 for index in range(len(pointA)))
