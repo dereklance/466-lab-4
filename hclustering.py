@@ -141,6 +141,37 @@ def get_clusters(dendrogram, threshold):
 
   return clusters
 
+def get_point_clusters(cluster):
+  if not cluster.children:
+    return [cluster]
+
+  data = []
+  for child in cluster.children:
+    data += get_point_clusters(child)
+  
+  return data
+
+def get_min_max_average_distance(cluster):
+  point_clusters = get_point_clusters(cluster)
+  max_dist, min_dist, total_dist = -float("inf"), float("inf"), 0
+
+  for point in point_clusters:
+    distance = point.distance_to(cluster)
+    max_dist = max(max_dist, distance)
+    min_dist = min(min_dist, distance)
+    total_dist += distance
+
+  return min_dist, max_dist, (total_dist / len(point_clusters))
+
+def sse(cluster):
+  points = get_point_clusters(cluster)
+
+  sse = 0
+  for point in points:
+    sse += pow(point.distance_to(cluster), 2)
+
+  return sse
+
 def main():
   dataset = parse.csv(sys.argv[1])
   threshold = None
@@ -153,11 +184,22 @@ def main():
 
   if threshold:
     clusters = get_clusters(dendrogram, threshold)
-    for cluster in clusters:
+    for i, cluster in enumerate(clusters):
       print()
-      print("Cluster with height", cluster.distance, "and", cluster.get_data_count(), "points")
-      xml_print_dendrogram(cluster)
-    print(len(clusters), "clusters")
+      print("Cluster:", i+1)
+      print("Center:", cluster.centroid)
+      min_dist, max_dist, average_dist = get_min_max_average_distance(cluster)
+      print("Max Dist. to Center:", max_dist)
+      print("Min Dist. to Center:", min_dist)
+      print("Avg Dist. to Center:", average_dist)
+      points = get_point_clusters(cluster)
+      print(len(points), "Points:")
+      for point in points:
+        print(point.data[0])
+      print("SSE:", sse(cluster))
+
+    print()
+    print(len(clusters), "clusters total")
 
 if __name__ == '__main__':
 	main()
