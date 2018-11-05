@@ -91,9 +91,11 @@ def showScatterPlot3D(clusters, outliers):
 	for index, cluster in enumerate(clusters):
 		[xs, ys, zs] = zip(*cluster)
 		ax.scatter(xs, ys, zs, c=colors[index], marker=markers[index])
-	if len(outliers > 0):
-		[xs, ys] = zip(*outliers)
-		plt.scatter(xs, ys, c='r', marker='x')
+
+	if len(outliers) > 0:
+		print(outliers)
+		[xs, ys, zs] = zip(*outliers)
+		ax.scatter(xs, ys, zs, c='r', marker='x')
 
 	plt.savefig("matplotlib.png")
 
@@ -130,8 +132,8 @@ def outputClusterData(clusters, centroids):
 		print(f'Sum Squared Error: {stats["sse"]}')
 		print(f'{len(cluster)} Points:')
 
-		for dataPoint in cluster:
-			print(', '.join(map(str, dataPoint)))
+		#for dataPoint in cluster:
+		#	print(', '.join(map(str, dataPoint)))
 		print()
 
 def outputOutlierData(outliers, numDataPoints):
