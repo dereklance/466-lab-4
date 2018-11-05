@@ -135,8 +135,6 @@ def findDistanceStats(cluster, centroid):
 	}
 
 def outputClusterData(clusters, centroids):
-	sse = 0
-
 	for index, (cluster, centroid) in enumerate(zip(clusters, centroids)):
 		print(f'Cluster {index}:')
 		print(f'Center: {", ".join(map(str, centroid))}')
@@ -145,14 +143,11 @@ def outputClusterData(clusters, centroids):
 		print(f'Min Dist. to Center: {stats["min"]}')
 		print(f'Avg Dist. to Center: {stats["avg"]}')
 		print(f'Sum Squared Error: {stats["sse"]}')
-		sse += stats['sse']
 		print(f'{len(cluster)} Points:')
 
 		for dataPoint in cluster:
 			print(', '.join(map(str, dataPoint)))
 		print()
-
-	return sse
 
 def showScatterPlot(clusters):
 	dimension = len(clusters[0][0])
