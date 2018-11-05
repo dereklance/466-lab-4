@@ -148,8 +148,8 @@ def outputClusterData(clusters, centroids):
 		print(f'SSE: {stats["sse"]}')
 		print(f'{len(cluster)} Points:')
 
-		#for dataPoint in cluster:
-		#	print(', '.join(map(str, dataPoint)))
+		for dataPoint in cluster:
+			print(', '.join(map(str, dataPoint)))
 		print()
 
 def showScatterPlot(clusters):
@@ -169,11 +169,11 @@ def main():
 	showScatterPlot(clusters)
 
 if __name__ == '__main__':
-  orig_stdout = sys.stdout
-  f = open(sys.argv[3], 'w')
-  sys.stdout = f
+  #orig_stdout = sys.stdout
+  #f = open(sys.argv[3], 'w')
+  #sys.stdout = f
 
   main()
 
-  sys.stdout = orig_stdout
-  f.close()
+  #sys.stdout = orig_stdout
+  #f.close()

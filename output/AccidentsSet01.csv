@@ -1,0 +1,77 @@
+<tree height="72.015625">
+  <node height="10.25">
+    <node height="1.111111111111111">
+      <node height="6.25">
+        <node height="1.0">
+          <leaf height="0" data="[2.0, 2.0, 1.0]" />
+          <leaf height="0" data="[2.0, 1.0, 1.0]" />
+        </node>
+        <leaf height="0" data="[2.0, 4.0, 1.0]" />
+      </node>
+      <node height="4.0">
+        <node height="0.0">
+          <leaf height="0" data="[2.0, 2.0, 2.0]" />
+          <leaf height="0" data="[2.0, 2.0, 2.0]" />
+        </node>
+        <leaf height="0" data="[2.0, 4.0, 2.0]" />
+      </node>
+    </node>
+    <node height="1.0">
+      <leaf height="0" data="[2.0, 5.0, 4.0]" />
+      <leaf height="0" data="[2.0, 5.0, 3.0]" />
+    </node>
+  </node>
+  <node height="25.0">
+    <node height="2.25">
+      <node height="9.0">
+        <node height="1.0">
+          <leaf height="0" data="[5.0, 11.0, 1.0]" />
+          <leaf height="0" data="[5.0, 12.0, 1.0]" />
+        </node>
+        <node height="1.0">
+          <leaf height="0" data="[5.0, 14.0, 1.0]" />
+          <leaf height="0" data="[5.0, 15.0, 1.0]" />
+        </node>
+      </node>
+      <node height="1.0">
+        <leaf height="0" data="[5.0, 14.0, 1.0]" />
+        <leaf height="0" data="[5.0, 15.0, 1.0]" />
+      </node>
+    </node>
+    <node height="3.2400000000000024">
+      <node height="2.25">
+        <node height="1.0">
+          <node height="0.0">
+            <leaf height="0" data="[5.0, 8.0, 1.0]" />
+            <leaf height="0" data="[5.0, 8.0, 1.0]" />
+          </node>
+          <node height="0.0">
+            <leaf height="0" data="[5.0, 9.0, 1.0]" />
+            <leaf height="0" data="[5.0, 9.0, 1.0]" />
+          </node>
+        </node>
+        <leaf height="0" data="[5.0, 10.0, 1.0]" />
+      </node>
+      <leaf height="0" data="[5.0, 7.0, 1.0]" />
+    </node>
+  </node>
+</tree>
+
+
+Cluster: 0
+Center: [2.0, 3.125, 2.0]
+Max Dist. to Center: 7.515625
+Min Dist. to Center: 0.765625
+Avg Dist. to Center: 3.109375
+SSE: 119.337890625
+8 Points:
+
+Cluster: 1
+Center: [5.0, 11.0, 1.0]
+Max Dist. to Center: 16.0
+Min Dist. to Center: 0.0
+Avg Dist. to Center: 7.833333333333333
+SSE: 1126.0
+12 Points:
+
+2 clusters total

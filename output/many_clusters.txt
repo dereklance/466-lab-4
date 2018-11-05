@@ -1,0 +1,68 @@
+Cluster 0:
+Center: 22.428571428571427, 42.57142857142857
+Max Dist. to Center: 4.3189189879517045
+Min Dist. to Center: 0.6060915267313268
+Avg Dist. to Center: 2.3159871090114765
+Sum Squared Error: 51.42857142857144
+7 Points:
+
+Cluster 1:
+Center: 41.111111111111114, 40.55555555555556
+Max Dist. to Center: 5.516529594358407
+Min Dist. to Center: 0.4581228472908504
+Avg Dist. to Center: 2.99514435732394
+Sum Squared Error: 105.11111111111109
+9 Points:
+
+Cluster 2:
+Center: 8.0, 35.166666666666664
+Max Dist. to Center: 7.769241347204441
+Min Dist. to Center: 0.1666666666666643
+Avg Dist. to Center: 3.509204319867297
+Sum Squared Error: 203.66666666666666
+12 Points:
+
+Cluster 3:
+Center: 36.45454545454545, 26.454545454545453
+Max Dist. to Center: 6.725429722975157
+Min Dist. to Center: 0.710022697809696
+Avg Dist. to Center: 3.6253942371119194
+Sum Squared Error: 193.45454545454544
+11 Points:
+
+Cluster 4:
+Center: 10.909090909090908, 6.090909090909091
+Max Dist. to Center: 6.20982958470475
+Min Dist. to Center: 0.9136250564655347
+Avg Dist. to Center: 3.14885882918028
+Sum Squared Error: 151.8181818181818
+11 Points:
+
+Cluster 5:
+Center: 42.0, 7.166666666666667
+Max Dist. to Center: 4.867693955503411
+Min Dist. to Center: 0.16666666666666696
+Avg Dist. to Center: 2.1100853808578495
+Sum Squared Error: 38.83333333333333
+6 Points:
+
+Outliers:
+Percentage of data: 23.29
+17 Points:
+24.0, 49.0
+26.0, 37.0
+26.0, 33.0
+46.0, 30.0
+28.0, 28.0
+18.0, 26.0
+9.0, 23.0
+31.0, 21.0
+23.0, 19.0
+50.0, 19.0
+11.0, 18.0
+31.0, 17.0
+39.0, 16.0
+44.0, 15.0
+7.0, 14.0
+21.0, 13.0
+27.0, 3.0

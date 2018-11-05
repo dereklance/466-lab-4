@@ -1,24 +1,21 @@
 Cluster 0:
-Center: 2.0, 19.0, 2.0
-Max Dist. to Center: 0.0
-Min Dist. to Center: 0.0
-Avg Dist. to Center: 0.0
-SSE: 0.0
-1 Points:
+Center: 5.0, 10.3, 1.0
+Max Dist. to Center: 4.699999999999999
+Min Dist. to Center: 0.3000000000000007
+Avg Dist. to Center: 2.16
+Sum Squared Error: 64.10000000000002
+10 Points:
 
 Cluster 1:
 Center: 2.0, 3.125, 2.0
 Max Dist. to Center: 2.7414640249326636
 Min Dist. to Center: 0.875
-Avg Dist. to Center: 1.6467460440475656
-SSE: 24.875
+Avg Dist. to Center: 1.6467460440475654
+Sum Squared Error: 24.875
 8 Points:
 
-Cluster 2:
-Center: 5.0, 10.3, 1.0
-Max Dist. to Center: 4.699999999999999
-Min Dist. to Center: 0.3000000000000007
-Avg Dist. to Center: 2.16
-SSE: 64.1
-10 Points:
-
+Outliers:
+Percentage of data: 5.26
+1 Points:
+2.0, 19.0, 2.0
+[[2.0, 19.0, 2.0]]

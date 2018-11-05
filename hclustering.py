@@ -193,6 +193,28 @@ def showScatterPlot2D(clusters):
     plt.scatter(xs, ys, c=colors[index], marker=markers[index])
 
   plt.savefig("matplotlib.png")
+  
+def showScatterPlot3D(clusters):
+  fig = plt.figure()
+  ax = fig.add_subplot(111, projection='3d')
+
+  colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', \
+            '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', \
+            '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', \
+            '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', \
+            '#ffffff', '#000000']
+  markers=['.', ',', 'v', '^', '<', '>', '1', '2', '3', '4', '8', 's', 'p', \
+           'P', '*', 'h', '+', 'x', 'X']
+
+
+  for index, cluster in enumerate(clusters):
+    points = get_point_clusters(cluster)
+    xs = [x.data[0][0] for x in points]
+    ys = [y.data[0][1] for y in points]
+    zs = [z.data[0][2] for z in points]
+    ax.scatter(xs, ys, zs, c=colors[index], marker=markers[index])
+
+  plt.savefig("matplotlib.png")
 
 def main():
   dataset = parse.csv(sys.argv[1])
@@ -200,6 +222,7 @@ def main():
   if len(sys.argv) >= 3:
     threshold = float(sys.argv[2])
 
+  print("Dendrogram:")
   dendrogram = agglomerative_cluster(dataset)[0]
   xml_print_dendrogram(dendrogram)
   print()
@@ -217,20 +240,24 @@ def main():
       points = get_point_clusters(cluster)
       print("SSE:", sse(cluster))
       print(len(points), "Points:")
-      #for point in points:
-      #  print(point.data[0])
+      for point in points:
+        print(point.data[0])
 
     print()
     print(len(clusters), "clusters total")
-    showScatterPlot2D(clusters)
+
+    if len(clusters[0].data[0]) == 2:
+      showScatterPlot2D(clusters)
+    else:
+      showScatterPlot3D(clusters)
 
 
 if __name__ == '__main__':
-  orig_stdout = sys.stdout
-  f = open(sys.argv[3], 'w')
-  sys.stdout = f
+  #orig_stdout = sys.stdout
+  #f = open(sys.argv[3], 'w')
+  #sys.stdout = f
 
   main()
 
-  sys.stdout = orig_stdout
-  f.close()
+  #sys.stdout = orig_stdout
+  #f.close()

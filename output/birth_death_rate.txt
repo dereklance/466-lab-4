@@ -1,0 +1,24 @@
+Cluster 0:
+Center: 39.996, 10.235999999999999
+Max Dist. to Center: 10.054994380903448
+Min Dist. to Center: 1.250164789137816
+Avg Dist. to Center: 5.646862030760941
+Sum Squared Error: 913.7072
+25 Points:
+
+Cluster 1:
+Center: 20.327499999999997, 8.84
+Max Dist. to Center: 8.25789659961906
+Min Dist. to Center: 0.5738956786733994
+Avg Dist. to Center: 3.8522611792393584
+Sum Squared Error: 758.95575
+40 Points:
+
+Outliers:
+Percentage of data: 7.14
+5 Points:
+55.8, 25.6
+56.1, 33.1
+46.1, 18.7
+47.7, 17.3
+17.6, 19.8
