@@ -1,3 +1,6 @@
+# Derek Lance, dlance@calpoly.edu
+# Ian Battin, ibattin@calpoly.edu
+
 import sys, parse, random, math
 from operator import add
 import matplotlib.pyplot as plt

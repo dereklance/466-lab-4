@@ -1,3 +1,6 @@
+# Derek Lance, dlance@calpoly.edu
+# Ian Battin, ibattin@calpoly.edu
+
 def indexOf(array, value):
 	for index, item in enumerate(array):
 		if int(item) == value:

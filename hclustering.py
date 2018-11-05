@@ -1,3 +1,6 @@
+# Derek Lance, dlance@calpoly.edu
+# Ian Battin, ibattin@calpoly.edu
+
 import sys
 import parse
 from anytree import Node, RenderTree

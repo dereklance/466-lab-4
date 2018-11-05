@@ -1,10 +1,12 @@
 # 466-lab-4
 
 Ian Battin - ibattin@calpoly.edu
-Derek Lance - 
+Derek Lance - dlance@calpoly.edu
 
-To Run:
-1: Set up new environment
-2: Run "pip3 install -r requirements.txt"
-3: Run "python3 <kmeans.py | hclustering.py | dbscan.py> <path to csv file> <optional threshold>
-4: Profit
+Run 'pip install -r requirements.txt' to install dependencies
+
+K-means: 'python3 kmeans.py <filename> <number of clusters>
+
+hierarchical clustering: 'python3 hclustering.py <filename> <optional threshold>
+
+dbscan: 'python3 dbscan.py <filename> <epsilon> <minimum number of points>
