@@ -1,10 +1,11 @@
 # Derek Lance, dlance@calpoly.edu
 # Ian Battin, ibattin@calpoly.edu
-
 import sys
 import parse
 from anytree import Node, RenderTree
 from anytree.exporter import JsonExporter
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 class Cluster:
   def __init__(self, uid, data, min_max, distance = 0, children = None):
@@ -175,10 +176,28 @@ def sse(cluster):
 
   return sse
 
+def showScatterPlot2D(clusters):
+  colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', \
+            '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', \
+            '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', \
+            '#aaffc3', '#808000', '#ffd8b1', '#000075', '#808080', \
+            '#ffffff', '#000000']
+  markers=['.', ',', 'v', '^', '<', '>', '1', '2', '3', '4', '8', 's', 'p', \
+           'P', '*', 'h', '+', 'x', 'X']
+
+
+  for index, cluster in enumerate(clusters):
+    points = get_point_clusters(cluster)
+    xs = [x.data[0][0] for x in points]
+    ys = [y.data[0][1] for y in points]
+    plt.scatter(xs, ys, c=colors[index], marker=markers[index])
+
+  plt.savefig("matplotlib.png")
+
 def main():
   dataset = parse.csv(sys.argv[1])
   threshold = None
-  if len(sys.argv) == 3:
+  if len(sys.argv) >= 3:
     threshold = float(sys.argv[2])
 
   dendrogram = agglomerative_cluster(dataset)[0]
@@ -189,20 +208,29 @@ def main():
     clusters = get_clusters(dendrogram, threshold)
     for i, cluster in enumerate(clusters):
       print()
-      print("Cluster:", i+1)
+      print("Cluster:", i)
       print("Center:", cluster.centroid)
       min_dist, max_dist, average_dist = get_min_max_average_distance(cluster)
       print("Max Dist. to Center:", max_dist)
       print("Min Dist. to Center:", min_dist)
       print("Avg Dist. to Center:", average_dist)
       points = get_point_clusters(cluster)
-      print(len(points), "Points:")
-      for point in points:
-        print(point.data[0])
       print("SSE:", sse(cluster))
+      print(len(points), "Points:")
+      #for point in points:
+      #  print(point.data[0])
 
     print()
     print(len(clusters), "clusters total")
+    showScatterPlot2D(clusters)
+
 
 if __name__ == '__main__':
-	main()
+  orig_stdout = sys.stdout
+  f = open(sys.argv[3], 'w')
+  sys.stdout = f
+
+  main()
+
+  sys.stdout = orig_stdout
+  f.close()

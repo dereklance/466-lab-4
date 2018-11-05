@@ -4,6 +4,7 @@
 import sys, parse, random, math
 from operator import add
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
 
 def euclidianDistance(pointA, pointB):
 	total = sum((pointA[index] - pointB[index]) ** 2 for index in range(len(pointA)))
@@ -101,7 +102,7 @@ def showScatterPlot3D(clusters):
 		[xs, ys, zs] = zip(*cluster)
 		ax.scatter(xs, ys, zs, c=colors[index], marker=markers[index])
 
-	plt.show()
+	plt.savefig("matplotlib.png")
 
 def showScatterPlot2D(clusters):
 	colors = ['r', 'b', 'g', 'c', 'm', 'y', 'k']
@@ -111,7 +112,7 @@ def showScatterPlot2D(clusters):
 		[xs, ys] = zip(*cluster)
 		plt.scatter(xs, ys, c=colors[index], marker=markers[index])
 
-	plt.show()
+	plt.savefig("matplotlib.png")
 
 def findDistanceStats(cluster, centroid):
 	maxDistance = minDistance = euclidianDistance(cluster[0], centroid)
@@ -144,11 +145,11 @@ def outputClusterData(clusters, centroids):
 		print(f'Max Dist. to Center: {stats["max"]}')
 		print(f'Min Dist. to Center: {stats["min"]}')
 		print(f'Avg Dist. to Center: {stats["avg"]}')
-		print(f'Sum Squared Error: {stats["sse"]}')
+		print(f'SSE: {stats["sse"]}')
 		print(f'{len(cluster)} Points:')
 
-		for dataPoint in cluster:
-			print(', '.join(map(str, dataPoint)))
+		#for dataPoint in cluster:
+		#	print(', '.join(map(str, dataPoint)))
 		print()
 
 def showScatterPlot(clusters):
@@ -168,4 +169,11 @@ def main():
 	showScatterPlot(clusters)
 
 if __name__ == '__main__':
-	main()
+  orig_stdout = sys.stdout
+  f = open(sys.argv[3], 'w')
+  sys.stdout = f
+
+  main()
+
+  sys.stdout = orig_stdout
+  f.close()

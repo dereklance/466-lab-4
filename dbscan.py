@@ -91,7 +91,7 @@ def showScatterPlot3D(clusters, outliers):
 	[xs, ys] = zip(*outliers)
 	plt.scatter(xs, ys, c='r', marker='x')
 
-	plt.show()
+	plt.savefig("matplotlib.png")
 
 def showScatterPlot2D(clusters, outliers):
 	colors = ['b', 'g', 'c', 'm', 'y', 'k', 'b', 'g', 'c', 'm', 'y', 'k']
@@ -103,7 +103,7 @@ def showScatterPlot2D(clusters, outliers):
 	[xs, ys] = zip(*outliers)
 	plt.scatter(xs, ys, c='r', marker='x')
 
-	plt.show()
+	plt.savefig("matplotlib.png")
 
 def showScatterPlot(clusters, outliers):
 	dimension = len(clusters[0][0])
@@ -124,4 +124,11 @@ def main():
 	showScatterPlot(clusters, outliers)
 
 if __name__ == '__main__':
-	main()
+  orig_stdout = sys.stdout
+  f = open(sys.argv[4], 'w')
+  sys.stdout = f
+
+  main()
+
+  sys.stdout = orig_stdout
+  f.close()
